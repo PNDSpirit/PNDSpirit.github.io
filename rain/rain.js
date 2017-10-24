@@ -1,5 +1,5 @@
 var framerate = 60;
-var drop_count = 2500;
+var drop_count = 2000;
 var drops = [];
 var canvas = document.getElementById('rainCanvas');
 var context = canvas.getContext('2d');
@@ -26,7 +26,7 @@ function drop() {
 			alert("z <= 0");
 		this.velocity = 0;
 		//this.style = "rgb(" + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + ")";
-		this.style = "rgb(0,0,0)"
+		//this.style = "rgb(0,0,0)"
 	}
 }
 
@@ -41,7 +41,7 @@ function animate() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	for (var i = 0; i < drop_count; ++i) {
 		drops[i].velocity += drops[i].z;
-		drops[i].y += drops[i].velocity / 2;
+		drops[i].y += drops[i].velocity / 15;
 		if (drops[i].y > canvas.height * ((framerate / 5) + 1)) {
 			drops[i].restoreStarterValues();
 		}
