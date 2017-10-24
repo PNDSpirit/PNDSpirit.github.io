@@ -1,7 +1,7 @@
 var canvas = document.getElementById('gameCanvas');
 var context = canvas.getContext('2d');
 var snakeLength = 3;
-var frameRate = 8;
+var frameRate = 1;
 var pixelSize = 32;
 var snakeDirection = "right";
 var newDirection = "right";
@@ -47,6 +47,7 @@ function setDirection(e) {
         case 37:
 			if(snakeDirection != "right") {
 				newDirection = "left";
+				nextDirection = "left";
 			}
 			else if (newDirection != "right"){
 				nextDirection = "left"
@@ -55,6 +56,7 @@ function setDirection(e) {
 		case 38:
 			if(snakeDirection != "down") {
 				newDirection = "up";
+				nextDirection = "up";
 			}
 			else if (newDirection != "down"){
 				nextDirection = "up"
@@ -63,6 +65,7 @@ function setDirection(e) {
         case 39:
 			if(snakeDirection != "left") {
 				newDirection = "right"; 
+				nextDirection = "right";
 			}	
 			else if (newDirection != "left"){
 				nextDirection = "right"
@@ -71,6 +74,7 @@ function setDirection(e) {
         case 40:
 			if(snakeDirection != "up") {
 				newDirection = "down";
+				nextDirection = "down";
 			}
 			else if (newDirection != "up"){
 				nextDirection = "down"
