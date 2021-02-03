@@ -202,7 +202,7 @@
     </style>
   </head>
   <body onload="setGpxFileNamePlaceholder(); addNewLap();">
-    <script type="module" src="laps_counter.js"></script>
+    <script type="module">import * as laps_counter from './__target__/laps_counter.js'; window.laps_counter = laps_counter;</script>
     <script>
         function addNewLap() {
             let laps_holder = document.getElementById("list_of_laps")
@@ -233,6 +233,19 @@
             inputField.placeholder = gpxFileName
         }
 
+        function download(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        }
+
         function generateGpxFile(item) {
             var list_of_lap_times_formatted = []
             var laps_holder = document.getElementById("list_of_laps")
@@ -241,7 +254,14 @@
                 list_of_lap_times_formatted.push(lapEntry.childNodes[1].value)
             }
             var resulting_gpx_string = laps_counter.create_gpx(list_of_lap_times_formatted)
-            console.log(resulting_gpx_string)
+            // console.log(resulting_gpx_string)
+            var name = document.getElementById("gpxFileName").value
+            if (!name || 0 === name.length) {
+              name = document.getElementById("gpxFileName").placeholder
+            } else if (!name.endsWith(".gpx")) {
+              name = name.concat(".gpx")
+            }
+            download(name, resulting_gpx_string)
         }
     </script>
     <div class="testbox">
