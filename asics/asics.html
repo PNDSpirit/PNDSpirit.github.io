@@ -202,6 +202,7 @@
     </style>
   </head>
   <body onload="setGpxFileNamePlaceholder(); addNewLap();">
+    <script type="module">import * as laps_counter from './__target__/laps_counter.js'; window.laps_counter = laps_counter;</script>
     <script>
         function addNewLap() {
             let laps_holder = document.getElementById("list_of_laps")
@@ -233,13 +234,14 @@
         }
 
         function generateGpxFile(item) {
-            console.log("TODO :)")
+            var list_of_lap_times_formatted = []
             var laps_holder = document.getElementById("list_of_laps")
             for (var i = 1; i < laps_holder.childElementCount; i++) {
                 lapEntry = document.getElementById("lap" + i.toString())
-                console.log(lapEntry.childNodes[1])
+                list_of_lap_times_formatted.push(lapEntry.childNodes[1].value)
             }
-            console.log("DONE :)")
+            var resulting_gpx_string = laps_counter.create_gpx(list_of_lap_times_formatted)
+            console.log(resulting_gpx_string)
         }
     </script>
     <div class="testbox">
